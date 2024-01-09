@@ -1,0 +1,34 @@
+name: Airflow Scheduler Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dags/**'
+      
+jobs:
+  sync_scheduler:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Create SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/gcp-docker.pem
+          chmod 600 $HOME/gcp-docker.pem
+      - name: Create SSH directory
+        run: |
+          mkdir -p ~/.ssh
+
+      - name: Add known host
+        run: |
+          ssh-keyscan 34.64.119.159 >> ~/.ssh/known_hosts
+
+      - name: Copy DAGs to Airflow
+        run: |
+          cd ${{ github.workspace }}/dags
+          scp -i $HOME/gcp-docker.pem -r ./* es344299@34.64.119.159:~/learn-airflow/dags/
+          echo "Copied DAGs to Airflow server"
