@@ -18,7 +18,7 @@ def fetch_and_upload(**kwargs):
     api_url = "https://flower.at.or.kr/api/returnData.api"
     common_params = {
         'kind': 'f001',
-        'serviceKey': Variable.get('flower_serviceKey')
+        'serviceKey': Variable.get('flower_serviceKey'),
         'baseDate': base_date_str,
         'flowerGubn': '1',
         'dataType': 'json',
