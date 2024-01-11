@@ -5,6 +5,7 @@ from airflow.providers.google.cloud.hooks.gcs import GCSHook
 import pandas as pd
 import requests
 from io import StringIO
+from airflow.models import Variable
 import csv
 
 # API Data -> GCS bucket
@@ -17,7 +18,7 @@ def fetch_and_upload(**kwargs):
     api_url = "https://flower.at.or.kr/api/returnData.api"
     common_params = {
         'kind': 'f001',
-        'serviceKey': '310CDDF09D3B4B93B4F86AE7E062BA82',
+        'serviceKey': Variable.get('flower_serviceKey')
         'baseDate': base_date_str,
         'flowerGubn': '1',
         'dataType': 'json',
