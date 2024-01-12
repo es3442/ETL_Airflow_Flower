@@ -15,8 +15,10 @@ GCS_OBJECT_NAME = 'weather/weather_data.csv'
 
 
 def fetch_weather_data(**kwargs):
-    today = kwargs['execution_date']
-    day_1yr_before = today - timedelta(days=365)
+    exec_date = kwargs['execution_date']
+    #Format to YYYYMMDD
+    today = exec_date.strftime("%Y%m%d")
+    day_1yr_before = (exec_date - timedelta(days=365)).strftime("%Y%m%d")
 
     api_url = 'http://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList'
     params = {
@@ -26,8 +28,8 @@ def fetch_weather_data(**kwargs):
         'dataType': 'JSON',
         'dataCd': 'ASOS',
         'dateCd': 'DAY',
-        'startDt': ''.join(day_1yr_before[:10].split('-')),
-        'endDt': ''.join(today[:10].split('-')),
+        'startDt': day_1yr_before,
+        'endDt': today,
         'stnIds': '108'
     }
     response = requests.get(api_url, params=params)
