@@ -21,10 +21,10 @@ Airflow dag를 깃허브를 이용해 관리할 수 있습니다.<br>
 
 ## 🌼사용 데이터
 - [일자별 화훼 경매 정보](https://flower.at.or.kr/api/apiOpenInfo.do) <br>
-- [기상청 데이터](https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&tabNo=2 <br>
+- [기상청 데이터](https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&tabNo=2) <br>
 - [학사일정](https://open.neis.go.kr/portal/data/service/selectServicePage.do?page=1&rows=10&sortColumn=&sortDirection=&infId=OPEN17220190722175038389180&infSeq=2)<br><br>
 ## 🌼프로젝트 구조
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e937a7f9-dece-4540-8e1e-3c5966896424/5beb05ff-8658-4dbe-9c68-29b264650b8a/Untitled.png)<br>
+![Untitled-2024-01-13-0010 excalidraw](https://github.com/es3442/ETL_Airflow_Flower/assets/77157003/7ddc9160-e4d9-49e1-8b72-7a76dbc02976)<br>
 1. API 호출을 통한 __데이터 수집 및 데이터 전처리__
 2. __클라우드 스토리지에 데이터 저장__ (Google Cloud Storage)
 3. Google cloud storage에 저장된 파일을 __데이터 웨어하우스에 적재__ (Bigquery)
@@ -55,8 +55,7 @@ Airflow dag를 깃허브를 이용해 관리할 수 있습니다.<br>
 - 김바롬 : 기본 코드 제공
 - 임동빈 : `기상청 데이터' - 
 - 최윤주 : `학교별 일정 데이터' - 
-- 최은서 : `화훼 데이터` - [Airflow dag로 GCS 저장 자동화](https://github.com/es3442/ETL_Airflow_Flower/blob/main/dags/fetch_and_upload_dag_final.py)<br>
-                         - Bigquery Data-Transfer로 Bigquery 적재 자동화
+- 최은서 : `화훼 데이터` - [Airflow dag로 GCS 저장 자동화](https://github.com/es3442/ETL_Airflow_Flower/blob/main/dags/fetch_and_upload_dag_final.py), [Bigquery-Data_Transfer로 GCS->Bigquery 적재 자동화]
 ### ETL 및 데이터 분석(대시보드 작성)
 - 임동빈
 - 최봉승
