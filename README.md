@@ -1,7 +1,7 @@
 # [Programmers-devcourse]
 ### 데이터 웨어하우스를 이용한 대시보드 구성<br><br>
 ## 🌻주제<br>
-### 물류 데이터로 확인하는 우리 동네 택배 현황
+### 화훼가격과 거시지표를 이용한 데이터 분석
 ETL 프로세스를 통해 데이터웨어하우스에 데이터를 적재하고 대시보드 구성해 보는 프로젝트
 <br/>
 <br/>
@@ -54,7 +54,7 @@ Airflow dag를 깃허브를 이용해 관리할 수 있습니다.<br>
 ### ETL 프로세스(데이터 수집, 전처리, 클라우드 스토리지 저장, Bigquery 적재)
 - 김바롬 : 기본 코드 제공
 - 임동빈 : `기상청 데이터' - 
-- 최윤주 : `학교별 일정 데이터' - 
+- 최윤주 : `학교별 일정 데이터' - [Airflow dag로 GCS 저장 자동화](dags/academic_calendar_API_to_GCS.py), [Airflow dag로 GCS->Bigquery 적재 자동화](dags/EventScheduleGCSToBigQuery.py)(dags/GradulationScheduleGCSToBigQuery.py)
 - 최은서 : `화훼 데이터` - [Airflow dag로 GCS 저장 자동화](https://github.com/es3442/ETL_Airflow_Flower/blob/main/dags/fetch_and_upload_dag_final.py), [Bigquery-Data_Transfer로 GCS->Bigquery 적재 자동화]
 ### ETL 및 데이터 분석(대시보드 작성)
 - 임동빈
