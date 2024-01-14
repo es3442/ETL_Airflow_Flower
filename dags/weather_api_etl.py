@@ -8,19 +8,23 @@ from airflow.decorators import task
 import requests
 import pandas as pd
 import csv
+from datetime import datetime, timedelta
 
 
 def fetch_weather_data():
     api_url = 'http://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList'
+    today = datetime.today().strftime('%Y%m%d')
+    start_date = '20220101'
+    end_date = str(int(today)-1)
     params = {
         'serviceKey': Variable.get('weather_serviceKey'),
         'pageNo': '1',
-        'numOfRows': '365',
+        'numOfRows': str((datetime.strptime(end_date, '%Y%m%d') - datetime.strptime(start_date, '%Y%m%d')).days + 1),
         'dataType': 'JSON',
         'dataCd': 'ASOS',
         'dateCd': 'DAY',
-        'startDt': '20240101',
-        'endDt': '20240110',
+        'startDt': start_date,
+        'endDt': end_date,
         'stnIds': '108'
     }
     response = requests.get(api_url, params=params)
@@ -35,7 +39,7 @@ def fetch_weather_data():
     # GCSHook을 사용하여 GCS에 파일 업로드-------------------------------
     gcs_hook = GCSHook(gcp_conn_id='gcp_conn') # Airflow 웹 UI connection 정보 참조(서비스 계정 키 설정)
     bucket_name = 'flower-pipeline-bucket' # 버킷이름
-    object_name = 'weather_data_test.csv' # 버킷에 저장위치 및 파일명
+    object_name = 'weather/weather_data.csv' # 버킷에 저장위치 및 파일명
     gcs_hook.upload(bucket_name, object_name, data=csv_string, mime_type='text/csv') # 업로드
 
 default_args = {
