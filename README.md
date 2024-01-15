@@ -53,10 +53,10 @@ Airflow dag를 깃허브를 이용해 관리할 수 있습니다.<br>
 - 최은서 : GCP(VM)를 사용하여 Airflow서버 구축
 ### ETL 프로세스(데이터 수집, 전처리, 클라우드 스토리지 저장, Bigquery 적재)
 - 김바롬 : 기본 코드 제공
-- 임동빈 : `기상청 데이터` - 
+- 임동빈 : `기상청 데이터` - [Airflow dag로 GCS 저장 자동화](https://github.com/es3442/ETL_Airflow_Flower/blob/main/dags/weather_api_etl.py), [Airflow GCSToBigQueryOperator로 GCS -> BigQuery 적재 자동화](https://github.com/es3442/ETL_Airflow_Flower/blob/main/dags/weather_bucket_to_BQ.py)
 - 최윤주 : `학교별 일정 데이터` - [Airflow dag로 GCS 저장 자동화](dags/academic_calendar_API_to_GCS.py), [Airflow dag로 GCS->Bigquery 적재 자동화](dags/EventScheduleGCSToBigQuery.py)
 - 최은서 : `화훼 데이터` - [Airflow dag로 GCS 저장 자동화](https://github.com/es3442/ETL_Airflow_Flower/blob/main/dags/fetch_and_upload_dag_final.py), [Bigquery-Data_Transfer로 GCS->Bigquery 적재 자동화]
-### ETL 및 데이터 분석(대시보드 작성)
-- 임동빈
+### ELT 및 데이터 분석(대시보드 작성)
+- 임동빈 
 - 최봉승
 - 최윤주
