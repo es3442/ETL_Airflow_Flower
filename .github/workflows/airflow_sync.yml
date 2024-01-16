@@ -27,16 +27,15 @@ jobs:
         run: |
           ssh-keyscan 34.64.119.159 >> ~/.ssh/known_hosts
 
-      - name: Check current directory permissions
+      - name: Get DAGs Directory
         run: |
-          ls -ld ${{ github.workspace }}/dags/
-
-      - name: Check permissions of the specific file
-        run: |
-          ls -l ${{ github.workspace }}/dags/GradulationScheduleGCSToBigQuery.py
-
-      - name: Copy DAGs to Airflow
-        run: |
-          cd ${{ github.workspace }}/dags
-          scp -v -i $HOME/gcp-docker.pem -r ./* es344299@34.64.119.159:~/learn-airflow/dags/
+          DAGS_DIR="${{ github.workspace }}/dags"
+          REMOTE_DIR="~/learn-airflow/dags"
+          
+          # Your logic to get the specific file or files
+          FILE_TO_COPY=$(find "$DAGS_DIR" -name '*.py' -type f)
+          
+          # Copy the file to the remote directory
+          scp -v -i $HOME/gcp-docker.pem $FILE_TO_COPY es344299@34.64.119.159:$REMOTE_DIR/
+          
           echo "Copied DAGs to Airflow server"
