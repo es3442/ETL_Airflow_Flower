@@ -34,7 +34,10 @@ jobs:
           
           # Your logic to get the specific file or files
           FILE_TO_COPY=$(find "$DAGS_DIR" -name '*.py' -type f)
-          
+
+          #chmod
+          ssh -i $HOME/gcp-docker.pem es344299@34.64.119.159 "find $REMOTE_DIR -type d -exec chmod 755 {} \; && find $REMOTE_DIR -type f -exec chmod 644 {} \;"
+
           # Copy the file to the remote directory
           scp -v -i $HOME/gcp-docker.pem $FILE_TO_COPY es344299@34.64.119.159:$REMOTE_DIR/
           
