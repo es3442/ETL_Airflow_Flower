@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'dags/**'
-      
+
 jobs:
   sync_scheduler:
     runs-on: ubuntu-latest
@@ -22,23 +22,11 @@ jobs:
       - name: Create SSH directory
         run: |
           mkdir -p ~/.ssh
-
       - name: Add known host
         run: |
           ssh-keyscan 34.64.119.159 >> ~/.ssh/known_hosts
-
-      - name: Get DAGs Directory
+      - name: Copy DAGs to Airflow
         run: |
-          DAGS_DIR="${{ github.workspace }}/dags"
-          REMOTE_DIR="~/learn-airflow/dags"
-          
-          # Your logic to get the specific file or files
-          FILE_TO_COPY=$(find "$DAGS_DIR" -name '*.py' -type f)
-
-          #chmod
-          ssh -i $HOME/gcp-docker.pem es344299@34.64.119.159 "find $REMOTE_DIR -type d -exec chmod 755 {} \; && find $REMOTE_DIR -type f -exec chmod 644 {} \;"
-
-          # Copy the file to the remote directory
-          scp -v -i $HOME/gcp-docker.pem $FILE_TO_COPY es344299@34.64.119.159:$REMOTE_DIR/
-          
+          cd ${{ github.workspace }}/dags
+          scp -i $HOME/gcp-docker.pem -r ./* es344299@34.64.119.159:~/learn-airflow/dags/
           echo "Copied DAGs to Airflow server"
