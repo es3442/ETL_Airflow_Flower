@@ -27,6 +27,14 @@ jobs:
         run: |
           ssh-keyscan 34.64.119.159 >> ~/.ssh/known_hosts
 
+      - name: Check current directory permissions
+        run: |
+          ls -ld ${{ github.workspace }}/dags/
+
+      - name: Check permissions of the specific file
+        run: |
+          ls -l ${{ github.workspace }}/dags/GradulationScheduleGCSToBigQuery.py
+
       - name: Copy DAGs to Airflow
         run: |
           cd ${{ github.workspace }}/dags
